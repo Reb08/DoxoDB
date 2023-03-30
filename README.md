@@ -2,6 +2,7 @@
 
 Shiny app for exploring RNA-seq data of Doxorubicin-treated cells analysed by Distefano et al. 2023.
 
+To generate the data for this app, please see the steps in https://github.com/Reb08/Analysis_of_Doxo_Studies.
 
 ## Run the app locally
 
