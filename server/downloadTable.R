@@ -1,13 +1,13 @@
 #-------------------------------------------------table download------------------------------------------------------
 datasetInput <- reactive({
   if(input$dataset == "GSE135842"){
-    data <- data.table(fread("data/GSE135842-All_Samples.txt"))
+    data <- data.frame(fread("data/GSE135842-All_Samples.txt"), check.names = F)
   } else if (input$dataset == "GSE198396"){
-    data <- data.table(fread("data/GSE198396-All_Samples.txt"))
+    data <- data.frame(fread("data/GSE198396-All_Samples.txt"), check.names = F)
   } else if (input$dataset == "GSE154101"){
-    data <- data.table(fread("data/GSE154101-All_Samples.txt"))
+    data <- data.frame(fread("data/GSE154101-All_Samples.txt"), check.names = F)
   } else {
-    data <- data.table(fread("data/GSE136631-All_Samples.txt"))
+    data <- data.frame(fread("data/GSE136631-All_Samples.txt"), check.names = F)
   }
   
   on.exit(rm(data))
@@ -35,6 +35,6 @@ output$downloadData <- downloadHandler(
     
     # Write to a file specified by the 'file' argument
     write.table(datasetInput(), file, sep = sep,
-                row.names = FALSE)
+                row.names = FALSE, quote=F)
   }
 )

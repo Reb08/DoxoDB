@@ -36,10 +36,10 @@ selected_df <- reactive({
 # add column indicating whether the gene is an up- or down- regulated protein-coding gene or lncRNA
 selected_df_mutated <- reactive({
   Sign <- case_when(
-    selected_df()$logFC >= input$FC & selected_df()$FDR < input$FDR & selected_df()$Biotype == "Protein_Coding" ~ "Up-reg_Prot",
-    selected_df()$logFC >= input$FC & selected_df()$FDR < input$FDR & selected_df()$Biotype == "lncRNA" ~ "Up-reg_lncRNA",
-    selected_df()$logFC <= -input$FC & selected_df()$FDR < input$FDR & selected_df()$Biotype == "Protein_Coding" ~ "Down-reg_Prot",
-    selected_df()$logFC <= -input$FC & selected_df()$FDR < input$FDR & selected_df()$Biotype == "lncRNA" ~ "Down-reg_lncRNA",
+    selected_df()$logFC >= input$FC & selected_df()$FDR <= input$FDR & selected_df()$Biotype == "Protein_Coding" ~ "Up-reg_Prot",
+    selected_df()$logFC >= input$FC & selected_df()$FDR <= input$FDR & selected_df()$Biotype == "lncRNA" ~ "Up-reg_lncRNA",
+    selected_df()$logFC <= -input$FC & selected_df()$FDR <= input$FDR & selected_df()$Biotype == "Protein_Coding" ~ "Down-reg_Prot",
+    selected_df()$logFC <= -input$FC & selected_df()$FDR <= input$FDR & selected_df()$Biotype == "lncRNA" ~ "Down-reg_lncRNA",
     TRUE ~ "Unchanged")
   
   cbind(Significance = Sign, selected_df())

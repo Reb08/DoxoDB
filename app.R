@@ -30,7 +30,7 @@ footerHTML <- function() {  # defines style of the footer
         <span style='margin: 0;'>DoxoDB © 2023 Copyright:</span>
         <a href='http://heartlncrna.github.io' target='_blank'>heartlncrna</a>
         <span>&nbsp</span>
-        <a href='https://github.com/Bishop-Laboratory/FibroDB/' target='_blank'> 
+        <a href='https://github.com/Reb08/DoxoDB/' target='_blank'> 
           <img src='GitHub-Mark-Light-64px.png' height='20'>
       </div>
     </footer>
@@ -102,6 +102,7 @@ ui <- fluidPage(
     
     source(file.path("ui", "homePage.R"), local=TRUE)$value,
     source(file.path("ui", "explorePage.R"), local=TRUE)$value,
+    source(file.path("ui", "lncRNAPage.R"), local=TRUE)$value,
     source(file.path("ui", "downloadPage.R"), local=TRUE)$value,
     source(file.path("ui", "documentationPage.R"), local=TRUE)$value,
     
@@ -174,6 +175,7 @@ server <- function(input, output, session){
           logFC <= -input$FC & FDR < input$FDR & Biotype == "lncRNA" ~ "Down-reg lncRNA",
           TRUE ~ "Unchanged"))
     
+    
     on.exit(rm(df))
     
     return(df)
@@ -218,6 +220,7 @@ server <- function(input, output, session){
   source(file.path("server", "goAnalysis.R"), local=TRUE)$value
   source(file.path("server", "keggPlot.R"), local=TRUE)$value
   source(file.path("server", "vennDiagram.R"), local=TRUE)$value
+  source(file.path("server", "lncRNATable.R"), local=TRUE)$value
   source(file.path("server", "downloadTable.R"), local=TRUE)$value
   
 }
