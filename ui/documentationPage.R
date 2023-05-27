@@ -99,7 +99,8 @@ tabPanel(title=list(icon("circle-info"),"Documentation"),
                                ),
                                
                                p(strong("Comparisons Intersection."), strong("(A)"), "Controls the expression pattern of the DEGs used on (B).", 
-                                 strong("(B)"), "This interface displays the DEGs shared among the different comparisons of the selected study as a Venn Diagram" , style="width: 950px;")),
+                                 strong("(B)"), "This interface displays the DEGs shared among the different comparisons of the selected study as a Venn Diagram.",
+                                 strong("(C)"), "Displays the list of shared DEGs among the different comparisons of the selected study.", style="width: 950px;")),
                              
                              tags$figure(
                                align="center",

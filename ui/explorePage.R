@@ -59,7 +59,7 @@ tabPanel(title=list(icon("binoculars"), "Explore"),
                     
                   ),
                   fluidRow(
-                    column(10,
+                    column(11,
                            DT::dataTableOutput("table") %>% withSpinner(color="#0dc5c1"))  # main table on the left hand side of Explore Tab
                   ),
                   
@@ -78,7 +78,7 @@ tabPanel(title=list(icon("binoculars"), "Explore"),
                                       hidden(selectInput("gene", "Select a gene from the table:", choices = NULL))),  # this will allow user to select a specific row form the table (choices updated in app.R)
                                
                                column(10, align = "right",
-                                      tableOutput("summary_table"))  # count matrix on the right had side of volcanoPlot tab which shows number of up-and down-regulated genes in selected study and comparison
+                                      div(tableOutput("summary_table"), style="font-size:80%"))  # count matrix on the right had side of volcanoPlot tab which shows number of up-and down-regulated genes in selected study and comparison
                              ),
                              
                              br(),
@@ -170,7 +170,64 @@ tabPanel(title=list(icon("binoculars"), "Explore"),
                                
                              ),
                              
-                             plotOutput("VENN") %>% withSpinner(color="#0dc5c1"),
+                             fluidRow(
+                               column(10, offset=1, 
+                                      plotOutput("VENN") %>% withSpinner(color="#0dc5c1"))
+                             ),
+                             
+                             br(),
+                             
+                             fluidRow(
+                               column(9, offset=3,
+                                        hidden(p("Shared genes", id="title")),
+                                        verbatimTextOutput("VENN_info", placeholder = F),
+                                        tags$head(tags$style(HTML("#VENN_info{overflow-y:scroll;
+                                                                  height: 100px;
+                                                                  width: 450px;
+                                                                  max-width: 100%;
+                                                                  white-space: pre-wrap;
+                                                                  padding: 10ps 12 px;}")))
+                                      
+                                      
+                               )
+                             ),
+                             
+
+                             fluidRow(
+                               column(5, offset=1,
+                                      conditionalPanel(
+                                        condition = "input.study == 'GSE163361'",
+                                        hidden(p("Shared genes", id="title1")),
+                                        # div(style = "margin-top: -20px"),
+                                        tags$div(id="txt1", "Parental ctrl vs Parental Doxo", style = "margin-top: -15px; font-size:70%"),
+                                        verbatimTextOutput("VENN_info1", placeholder = F),
+                                        tags$head(tags$style(HTML("#VENN_info1{overflow-y:scroll;
+                                                                  height: 100px;
+                                                                  width: 300px;
+                                                                  max-width: 100%;
+                                                                  white-space: pre-wrap;
+                                                                  padding: 10ps 12 px;}")))
+                                      )
+
+                               ),
+                               column(5,
+                                      conditionalPanel(
+                                        condition = "input.study == 'GSE163361'",
+                                        hidden(p("Shared genes", id="title2")),
+                                        # div(style = "margin-top: -15px"),
+                                        tags$div(id="txt2", "Parental ctrl vs DoxoR ctrl", style = "margin-top: -15px; font-size:70%"),
+                                        verbatimTextOutput("VENN_info2", placeholder = F),
+                                        tags$head(tags$style(HTML("#VENN_info2{overflow-y:scroll;
+                                                                  height: 100px;
+                                                                  width: 300px;
+                                                                  max-width: 100%;
+                                                                  white-space: pre-wrap;
+                                                                  padding: 10ps 12 px;}")))
+                                      )
+
+                               ),
+                             ),
+                             
                              
                              br(),
                              hidden(p("Only one comparison in this study. No intersection available",

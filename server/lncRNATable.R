@@ -78,6 +78,8 @@ output$downloadlncRNATable <- downloadHandler(
 
 # might need to change this
 output$table_lncRNA <- DT::renderDataTable({
+  
+  font.size <- "14px"
 
   DT::datatable(
     my_table()[, c("Ensembl_ID", "Gene_symbol", "logFC", "FDR", "LncBook.ID", "Type", "Conservation", "nearest.PC", "Top.correlated.gene")],
